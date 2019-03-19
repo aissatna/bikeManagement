@@ -43,7 +43,7 @@ DisponibiliteVelo VARCHAR(20),
 constraint numVelo_pk primary key (numVelo),
 constraint numModele_fk Foreign key (numModele) references Modele(numModele),
 constraint EtatVelo_check check (EtatVelo in ('EnService','HorsService')),
-constraint DisponibiliteVelo_check check (DisponibiliteVelo in ('louer','reserver','disponible')));
+constraint DisponibiliteVelo_check check (DisponibiliteVelo in ('Louer','Reserver','Disponible')));
 
 create table Bornette(
  numBornette INTEGER,
@@ -64,7 +64,7 @@ Sexe VARCHAR(10) not null,
 Adresse VARCHAR(70) not null,
 NumCB VARCHAR(20) not null,
 CodeSecret VARCHAR(20)not null,
-Prime INTEGER not null,
+Prime INTEGER default 0,
 DebutAbonnement date not null,
 FinAbonnement date not null,
 constraint numClientAbonne_pk primary key (numClientAbonne),
