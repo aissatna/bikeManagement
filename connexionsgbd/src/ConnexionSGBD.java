@@ -9,10 +9,11 @@
  *
  * @author nabil
  */
+import Enum.Sexe;
+import Tables.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 class Connexionsgbd {
 
@@ -33,6 +34,11 @@ class Connexionsgbd {
             System.out.println("Connecté");
             // get informations 
             RequetesBd.getModele(conn);
+            //ClientAbonne c = new ClientAbonne("bbb", "rrrr", "1999-11-28", Sexe.H, "Grenoble", "123456789");
+            //c.Ajout_Client_Abonne(conn, c);
+            LocationAbonne loc = new LocationAbonne();
+            loc.Ajout_Location_Abonne(conn, "aaa", "X4xfAO", 101, "grenoble");
+            //System.out.println(loc.get_NumClient_Abonne(conn, "aaa", "X4xfAO"));
 
 // Print information about connection warnings
             SQLWarningsExceptions.printWarnings(conn);

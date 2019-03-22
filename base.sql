@@ -43,7 +43,7 @@ DisponibiliteVelo VARCHAR(20),
 constraint numVelo_pk primary key (numVelo),
 constraint numModele_fk Foreign key (numModele) references Modele(numModele),
 constraint EtatVelo_check check (EtatVelo in ('EnService','HorsService')),
-constraint DisponibiliteVelo_check check (DisponibiliteVelo in ('louer','reserver','disponible')));
+constraint DisponibiliteVelo_check check (DisponibiliteVelo in ('Louer','Reserver','Disponible')));
 
 create table Bornette(
  numBornette INTEGER,
@@ -64,7 +64,7 @@ Sexe VARCHAR(10) not null,
 Adresse VARCHAR(70) not null,
 NumCB VARCHAR(20) not null,
 CodeSecret VARCHAR(20)not null,
-Prime INTEGER not null,
+Prime INTEGER default 0,
 DebutAbonnement date not null,
 FinAbonnement date not null,
 constraint numClientAbonne_pk primary key (numClientAbonne),
@@ -111,3 +111,5 @@ FinReservation date not null,
 constraint Reservation_pk primary key (numClientAbonne,numVelo),
 constraint Reservation_fk Foreign key (numClientAbonne) references ClientAbonne(numClientAbonne),
 constraint Reservation_fk2 Foreign key (numVelo) references Velo(numVelo));
+
+INSERT INTO ClientAbonne VALUES(023,'Bourgeois','Jules','08-03-1991','H','15 rue Saint Bruno 38000','12345764231897','4DRG45',12,'05-02-2018','05-02-2019');

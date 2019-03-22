@@ -19,11 +19,11 @@ public class RequetesBd {
     // Get a statement from the connection
         Statement stmt = conn.createStatement();
         // Execute the query
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Modele");
+        ResultSet rs = stmt.executeQuery("SELECT numClientAbonne, nom , CodeSecret FROM ClientAbonne");
         while (rs.next()) {
-            System.out.print("numModele : " + rs.getInt(1) + "");
-            System.out.print("Type : " + rs.getString(2) + "");
-            System.out.println("prix: " + rs.getInt(3));
+            System.out.print("numClientAbonne : " + rs.getInt(1) + " ");
+            System.out.print("nom : " + rs.getString(2) + " ");
+            System.out.println("CodeSecret: " + rs.getString(3));
         }
         System.out.println();
         // Close the result set, statement and theconnection 
