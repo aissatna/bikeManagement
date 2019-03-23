@@ -111,5 +111,8 @@ FinReservation date not null,
 constraint Reservation_pk primary key (numClientAbonne,numVelo),
 constraint Reservation_fk Foreign key (numClientAbonne) references ClientAbonne(numClientAbonne),
 constraint Reservation_fk2 Foreign key (numVelo) references Velo(numVelo));
+<<<<<<< HEAD
 
 INSERT INTO ClientAbonne VALUES(023,'Bourgeois','Jules','08-03-1991','H','15 rue Saint Bruno 38000','12345764231897','4DRG45',12,'05-02-2018','05-02-2019');
+=======
+>>>>>>> a3ff0ba03284569ff931a85193dc7932059c8f50
