@@ -32,10 +32,7 @@ public class ClientAbonne {
     private LocalDate DebutAbonnement;
     private LocalDate FinAbonnement;
     
-
-
-    public ClientAbonne(String nom, String prenom, String dateDeNaissance, Sexe sexe, String adresse , String NumCB) {
-       
+   public ClientAbonne(String nom, String prenom, String dateDeNaissance, Sexe sexe, String adresse , String NumCB) {
             this.nom = nom;
             this.prenom = prenom;
             this.sexe = sexe;
@@ -51,23 +48,23 @@ public class ClientAbonne {
             Logger.getLogger(ClientAbonne.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+   }
 
-    }
-
-    public void Ajout_Client_Abonne(Connection conn, ClientAbonne client) throws SQLException {
+  public void Ajout_Client_Abonne(Connection conn, ClientAbonne client) throws SQLException {
         // Get a statement from the connection
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery("SELECT MAX(numClientAbonne) FROM ClientAbonne");
         while (rs.next()) {
             client.numClientAbonne = (rs.getInt(1)) + 1;
         }
-         int nb = st.executeUpdate("INSERT INTO ClientAbonne(numClientAbonne,Nom,Prenom,DateDeNaissance,Sexe,Adresse,NumCB,CodeSecret"
+         
+        int nb = st.executeUpdate("INSERT INTO ClientAbonne(numClientAbonne,Nom,Prenom,DateDeNaissance,Sexe,Adresse,NumCB,CodeSecret"
                 + ",Prime,DebutAbonnement,FinAbonnement) VALUES('"+client.numClientAbonne+"','"+client.nom+"','"+client.prenom+"', TO_DATE("
                 + "'"+client.dateDeNaissance+"','yyyy-MM-dd'),'"+client.sexe+"','"+client.adresse+"','"+client.NumCB+"','"+client.codeSecret+"',"
                 + "'"+client.prime+"', TO_DATE("
                 + "'"+client.DebutAbonnement+"','yyyy-MM-dd'),TO_DATE("
                 + "'"+client.FinAbonnement+"','yyyy-MM-dd'))");
-         if (nb>0){
+        if (nb>0){
         System.out.println("Client enregistrée ....");
          System.out.println("Fin d'abonnement:"+this.FinAbonnement +" votre code secret:"+this.codeSecret);
          }
@@ -78,6 +75,4 @@ public class ClientAbonne {
        st.close();
 
     }
-   
-    
-}
+  }
