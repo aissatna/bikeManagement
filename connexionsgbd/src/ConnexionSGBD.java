@@ -9,10 +9,11 @@
  *
  * @author nabil
  */
+import Enum.Sexe;
+import Tables.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 class Connexionsgbd {
 
@@ -32,7 +33,9 @@ class Connexionsgbd {
             Connection conn = DriverManager.getConnection(dbUrl, username, password);
             System.out.println("Connecté");
             // get informations 
-            RequetesBd.getModele(conn);
+            RequetesBd.getClient(conn);
+            MenuChoix mn = new MenuChoix();
+            mn.menu(conn);
 
 // Print information about connection warnings
             SQLWarningsExceptions.printWarnings(conn);
