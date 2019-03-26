@@ -5,8 +5,8 @@ drop table ClientNonAbonne;
 drop table ClientAbonne;
 drop table Bornette;
 drop table Velo;
-drop table Station;
 drop table PlageHoraire;
+drop table Station;
 drop table Modele;
 
 create table Modele(
@@ -17,21 +17,22 @@ constraint numModele_pk primary key (numModele),
 constraint Prix_check check (Prix > 0),
 constraint TypeVelo_check check (TypeVelo in ('Velo_de_route','Velo_de_course','Velo_pliant','Velo_couche','Velo_electrique')));
 
+create table Station(
+numStation INTEGER ,
+adresse VARCHAR(70) not null unique,
+constraint numSation_pk primary key(numStation));
+
+
+
 create table PlageHoraire(
 numPlageHoraire INTEGER,
 HeureDebut date not null,
 HeureFin date not null,
 Type VARCHAR(20),
+NumStation INTEGER,
 constraint numPlageHoraire_pk primary key (numPlageHoraire),
-constraint Type_check check (Type in ('Vmoins','Vplus','Vnull')));
-
-
-create table Station(
-numStation INTEGER ,
-adresse VARCHAR(70) not null unique,
-numPlageHoraire INTEGER,
-constraint numSation_pk primary key(numStation),
-constraint numPlageHoraire_fk Foreign key (numPlageHoraire) references PlageHoraire(numPlageHoraire));
+constraint Type_check check (Type in ('Vmoins','Vplus','Vnull')),
+constraint numStation_fk Foreign key (NumStation) references Station(numStation));
 
 
 create table Velo (
@@ -48,10 +49,12 @@ constraint DisponibiliteVelo_check check (DisponibiliteVelo in ('Louer','Reserve
 create table Bornette(
  numBornette INTEGER,
  etatBornette VARCHAR(20) not null,
+ disponibilite VARCHAR(20),
  numStation INTEGER,
  numVelo INTEGER,
  constraint numBornette_pk primary key (numBornette),
- constraint numSation_fk Foreign key (numStation) references Station(numStation),
+ constraint numSation_fk Foreign key (numStation) references Station (numStation),
+ constraint Disponibilite_check check (disponibilite in ('Libre','Occupe')),
  constraint numVelo_fk  Foreign key (numVelo) references Velo(numVelo),
  constraint etatBornette_check check (etatBornette in ('EnService','HorsService')));
 
@@ -81,7 +84,7 @@ numClientAbonne INTEGER,
 numVelo INTEGER ,
 DebutLocation date not null,
 FinLocation date ,
-Duree INTEGER ,
+Duree INTEGER default 0,
 StationDepart INTEGER,
 StationArrivee INTEGER,
 constraint LocationAbonne_pk primary key (numClientAbonne,numVelo),
@@ -94,7 +97,7 @@ numClientNonAbonne INTEGER,
 numVelo INTEGER,
 DebutLocation date not null,
 FinLocation date,
-Duree INTEGER,
+Duree INTEGER default 0,
 StationDepart INTEGER,
 StationArrivee INTEGER,
 CodeSecret VARCHAR(20) not null,
@@ -104,10 +107,11 @@ constraint LocationNonAbonne_fk2 Foreign key (numVelo) references Velo(numVelo),
 constraint LocationNonAbonne_fk3 Foreign key (StationDepart) references Station(numStation));
 
 create table Reservation(
+numReservation INTEGER,
 numClientAbonne INTEGER,
-numVelo INTEGER,
+numStation INTEGER,
 DebutReservation date not null ,
 FinReservation date not null,
-constraint Reservation_pk primary key (numClientAbonne,numVelo),
+constraint Reservation_pk primary key (numReservation),
 constraint Reservation_fk Foreign key (numClientAbonne) references ClientAbonne(numClientAbonne),
-constraint Reservation_fk2 Foreign key (numVelo) references Velo(numVelo));
+constraint Reservation_fk2 Foreign key (numStation) references Station(numStation));
