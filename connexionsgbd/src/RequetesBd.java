@@ -15,7 +15,7 @@ import java.sql.ResultSet;
  * @author nabil
  */
 public class RequetesBd {
- public static void getModele(Connection conn) throws SQLException {  
+ public static void getClient(Connection conn) throws SQLException {  
     // Get a statement from the connection
         Statement stmt = conn.createStatement();
         // Execute the query

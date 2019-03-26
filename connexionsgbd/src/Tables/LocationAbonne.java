@@ -29,37 +29,23 @@ public class LocationAbonne {
     public LocationAbonne() {
     }
 
-    public void Ajout_Location_Abonne(Connection conn, String nomClient, String codeSecretClient, int Id_velo, String adresseStation) throws SQLException {
-        System.out.println("1");
-        this.numClientAbonne = get_NumClient_Abonne(conn, nomClient, codeSecretClient);
-        System.out.println("2");
+    public void Ajout_Location_Abonne(Connection conn, int id_Client, int Id_velo, int id_StationDepart) throws SQLException {
+        this.numClientAbonne = id_Client;
         this.numVelo = Id_velo; // Reste a verifier 
         this.DebutLocation = LocalDate.now();
         this.FinLocation = null;
         this.Duree = 0;
+        this.StationDepart = id_StationDepart;
         this.StationArrivee = -1;
-        this.StationDepart = get_NumStation(conn, adresseStation);
-        System.out.println("3");
-        if (this.numClientAbonne == -1) {
-            System.out.println("Pas du client abonné avec ces informations ");
-        } else if (StationDepart == -1) {
-            System.out.println("Pas de station trouvé a cette adresse ");
+        Statement st = conn.createStatement();
+        int nb = st.executeUpdate("INSERT INTO LocationAbonne(numClientAbonne,numVelo,DebutLocation,FinLocation,Duree,StationDepart,StationArrivee)VALUES("
+                + this.numClientAbonne + "," + this.numVelo + ",TO_DATE('" + this.DebutLocation + "','yyyy-MM-dd')," + this.FinLocation + ","
+                + this.Duree + "," + this.StationDepart + "," + this.StationArrivee + ")");
+        if (nb > 0) {
+            System.out.println("Location enregistrée ....");
 
         } else {
-            Statement st = conn.createStatement();
-            System.out.println("INSERT INTO LocationAbonne(numClientAbonne,numVelo,DebutLocation,FinLocation,Duree,StationDepart,StationArrivee)VALUES("
-                    + this.numClientAbonne + "," + this.numVelo + ",TO_DATE('" + this.DebutLocation + "','yyyy-MM-dd')," + this.FinLocation + ","
-                    + this.Duree + "," + this.StationDepart + "," + this.StationArrivee+")");
-
-            int nb = st.executeUpdate("INSERT INTO LocationAbonne(numClientAbonne,numVelo,DebutLocation,FinLocation,Duree,StationDepart,StationArrivee)VALUES("
-                    + this.numClientAbonne + "," + this.numVelo + ",TO_DATE('" + this.DebutLocation + "','yyyy-MM-dd')," + this.FinLocation + ","
-                    + this.Duree + "," + this.StationDepart + "," + this.StationArrivee+")");
-            if (nb > 0) {
-                System.out.println("Location enregistrée ....");
-               
-            } else {
-                System.out.println("Erreur dans l'insertion ??? ");
-            }
+            System.out.println("Erreur dans l'insertion ??? ");
         }
 
     }
@@ -67,8 +53,8 @@ public class LocationAbonne {
     public int get_NumClient_Abonne(Connection conn, String nom, String codeSecret) throws SQLException {
         int numClientAbonne = -1;
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(" select numClientAbonne from clientabonne where nom = '"+nom+"' and codesecret = '"+codeSecret+"' ");
-        System.out.println("SELECT numClientAbonne FROM ClientAbonne WHERE nom ='"+nom +"'and codeSecret ='"+codeSecret+"'");
+        ResultSet rs = st.executeQuery(" select numClientAbonne from clientabonne where nom = '" + nom + "' and codesecret = '" + codeSecret + "' ");
+        System.out.println("SELECT numClientAbonne FROM ClientAbonne WHERE nom ='" + nom + "'and codeSecret ='" + codeSecret + "'");
         while (rs.next()) {
             numClientAbonne = rs.getInt(1);
         }

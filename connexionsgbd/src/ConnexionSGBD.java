@@ -33,12 +33,9 @@ class Connexionsgbd {
             Connection conn = DriverManager.getConnection(dbUrl, username, password);
             System.out.println("Connecté");
             // get informations 
-            RequetesBd.getModele(conn);
-            //ClientAbonne c = new ClientAbonne("bbb", "rrrr", "1999-11-28", Sexe.H, "Grenoble", "123456789");
-            //c.Ajout_Client_Abonne(conn, c);
-            LocationAbonne loc = new LocationAbonne();
-            loc.Ajout_Location_Abonne(conn, "aaa", "X4xfAO", 101, "grenoble");
-            //System.out.println(loc.get_NumClient_Abonne(conn, "aaa", "X4xfAO"));
+            RequetesBd.getClient(conn);
+            MenuChoix mn = new MenuChoix();
+            mn.menu(conn);
 
 // Print information about connection warnings
             SQLWarningsExceptions.printWarnings(conn);
