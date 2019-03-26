@@ -5,21 +5,26 @@ INSERT INTO  Modele values (003,'Velo_pliant',15);
 INSERT INTO  Modele values (004,'Velo_couche',10);
 INSERT INTO  Modele values (005,'Velo_electrique',25);
 
---Insertion dans la table plage horaire----------------------------------------
-INSERT INTO PlageHoraire values (001,'09-JAN-2018','09-JAN-2018','Vplus');
-INSERT INTO PlageHoraire values (002,'09-JAN-2018','09-JAN-2018','Vplus');
-INSERT INTO PlageHoraire values (003,'09-JAN-2019','11-JAN-2019','Vmoins');
-INSERT INTO PlageHoraire values (004,'10-JAN-2019','12-JAN-2019','Vnull');
-INSERT INTO PlageHoraire values (006,'12-JAN-2019','13-JAN-2019','Vplus');
-INSERT INTO PlageHoraire values (007,'12-JAN-2019','13-JAN-2019','Vmoins');
-INSERT INTO PlageHoraire values (008,'13-JAN-2019','14-JAN-2019','Vnull');
-INSERT INTO PlageHoraire values (009,'14-JAN-2019','15-JAN-2019','Vplus');
-INSERT INTO PlageHoraire values (010,'15-JAN-2019','16-JAN-2019','Vmoins');
 
 --Insertion dans la table Station ------------------------------------------
-INSERT INTO Station VALUES(001,'7 rue boulevard des fauche grenoble 38100',002);
-INSERT INTO Station VALUES(002,'12 rue des Marronniers fontaine 38600',003);
-INSERT INTO Station VALUES(003,'77 avenue Jeanne d Arc SMH 38400',001);
+INSERT INTO Station VALUES(001,'7 rue boulevard des fauche grenoble 38100');
+INSERT INTO Station VALUES(002,'12 rue des Marronniers fontaine 38600');
+INSERT INTO Station VALUES(003,'77 avenue Jeanne d Arc SMH 38400');
+
+
+--Insertion dans la table plage horaire----------------------------------------
+INSERT INTO PlageHoraire values (001,TO_DATE('08:00:00','hh24:mi:ss'),TO_DATE('10:00:00','hh24:mi:ss'),'Vplus',001);
+INSERT INTO PlageHoraire values (002,TO_DATE('16:00:00','hh24:mi:ss'),TO_DATE('18:00:00','hh24:mi:ss'),'Vplus',001);
+INSERT INTO PlageHoraire values (003,TO_DATE('11:00:00','hh24:mi:ss'),TO_DATE('12:00:00','hh24:mi:ss'),'Vmoins',001);
+INSERT INTO PlageHoraire values (004,TO_DATE('12:00:00','hh24:mi:ss'),TO_DATE('13:00:00','hh24:mi:ss'),'Vnull',001);
+INSERT INTO PlageHoraire values (006,TO_DATE('08:00:00','hh24:mi:ss'),TO_DATE('10:00:00','hh24:mi:ss'),'Vplus',002);
+INSERT INTO PlageHoraire values (007,TO_DATE('11:00:00','hh24:mi:ss'),TO_DATE('12:00:00','hh24:mi:ss'),'Vmoins',003);
+INSERT INTO PlageHoraire values (008,TO_DATE('15:00:00','hh24:mi:ss'),TO_DATE('18:00:00','hh24:mi:ss'),'Vplus',003);
+INSERT INTO PlageHoraire values (009,TO_DATE('12:00:00','hh24:mi:ss'),TO_DATE('13:00:00','hh24:mi:ss'),'Vnull',003);
+INSERT INTO PlageHoraire values (010,TO_DATE('08:00:00','hh24:mi:ss'),TO_DATE('10:00:00','hh24:mi:ss'),'Vplus',001);
+INSERT INTO PlageHoraire values (011,TO_DATE('10:00:00','hh24:mi:ss'),TO_DATE('11:00:00','hh24:mi:ss'),'Vmoins',002);
+INSERT INTO PlageHoraire values (018,TO_DATE('12:00:00','hh24:mi:ss'),TO_DATE('13:00:00','hh24:mi:ss'),'Vnull',002);
+
 
 --Insertion dans la table Velo ------------------------------------------
 --Velo dans la station 1-------------------------------------------------
@@ -61,39 +66,39 @@ INSERT INTO Velo VALUES(300,002,'20-JUN-2018','EnService','Disponible');
 
 --Insertion dans la table Bornette ----------------------------------------
 --Station de serie de 1-------------------------------------------------
-INSERT INTO Bornette VALUES (100,'EnService',001,100);
-INSERT INTO Bornette VALUES (101,'EnService',001,101);
-INSERT INTO Bornette VALUES (102,'EnService',001,102);
-INSERT INTO Bornette VALUES (103,'EnService',001,103);
-INSERT INTO Bornette VALUES (104,'EnService',001,104);
-INSERT INTO Bornette VALUES (105,'EnService',001,105);
-INSERT INTO Bornette VALUES (106,'EnService',001,106);
-INSERT INTO Bornette VALUES (107,'HorsService',001,107);
-INSERT INTO Bornette VALUES (108,'EnService',001,108);
-INSERT INTO Bornette VALUES (109,'EnService',001,109);
+INSERT INTO Bornette VALUES (100,'EnService','Occupe',001,100);
+INSERT INTO Bornette VALUES (101,'EnService','Libre',001,101);
+INSERT INTO Bornette VALUES (102,'EnService','Occupe',001,102);
+INSERT INTO Bornette VALUES (103,'EnService','Libre',001,103);
+INSERT INTO Bornette VALUES (104,'EnService','Occupe',001,104);
+INSERT INTO Bornette VALUES (105,'EnService','Occupe',001,105);
+INSERT INTO Bornette VALUES (106,'EnService','Occupe',001,106);
+INSERT INTO Bornette VALUES (107,'HorsService','Occupe',001,107);
+INSERT INTO Bornette VALUES (108,'EnService','Occupe',001,108);
+INSERT INTO Bornette VALUES (109,'EnService','Occupe',001,109);
 
 --Station de serie de 2--------------------------------------------------
-INSERT INTO Bornette VALUES (200,'HorsService',002,200);
-INSERT INTO Bornette VALUES (201,'EnService',002,201);
-INSERT INTO Bornette VALUES (202,'EnService',002,202);
-INSERT INTO Bornette VALUES (203,'EnService',002,203);
-INSERT INTO Bornette VALUES (204,'EnService',002,204);
-INSERT INTO Bornette VALUES (205,'HorsService',002,205);
-INSERT INTO Bornette VALUES (206,'EnService',002,206);
-INSERT INTO Bornette VALUES (207,'EnService',002,207);
-INSERT INTO Bornette VALUES (208,'EnService',002,208);
-INSERT INTO Bornette VALUES (209,'EnService',002,209);
+INSERT INTO Bornette VALUES (200,'HorsService','Libre',002,200);
+INSERT INTO Bornette VALUES (201,'EnService','Occupe',002,201);
+INSERT INTO Bornette VALUES (202,'EnService','Occupe',002,202);
+INSERT INTO Bornette VALUES (203,'EnService','Occupe',002,203);
+INSERT INTO Bornette VALUES (204,'EnService','Occupe',002,204);
+INSERT INTO Bornette VALUES (205,'HorsService','Occupe',002,205);
+INSERT INTO Bornette VALUES (206,'EnService','Occupe',002,206);
+INSERT INTO Bornette VALUES (207,'EnService','Occupe',002,207);
+INSERT INTO Bornette VALUES (208,'EnService','Occupe',002,208);
+INSERT INTO Bornette VALUES (209,'EnService','Libre',002,209);
 --Station de serie de 3---------------------------------------------------
-INSERT INTO Bornette VALUES (300,'EnService',003,300);
-INSERT INTO Bornette VALUES (301,'EnService',003,301);
-INSERT INTO Bornette VALUES (302,'EnService',003,302);
-INSERT INTO Bornette VALUES (303,'HorsService',003,303);
-INSERT INTO Bornette VALUES (304,'EnService',003,304);
-INSERT INTO Bornette VALUES (305,'EnService',003,305);
-INSERT INTO Bornette VALUES (306,'EnService',003,306);
-INSERT INTO Bornette VALUES (307,'EnService',003,307);
-INSERT INTO Bornette VALUES (308,'HorsService',003,308);
-INSERT INTO Bornette VALUES (309,'EnService',003,309);
+INSERT INTO Bornette VALUES (300,'EnService','Occupe',003,300);
+INSERT INTO Bornette VALUES (301,'EnService','Occupe',003,301);
+INSERT INTO Bornette VALUES (302,'EnService','Occupe',003,302);
+INSERT INTO Bornette VALUES (303,'HorsService','Occupe',003,303);
+INSERT INTO Bornette VALUES (304,'EnService','Occupe',003,304);
+INSERT INTO Bornette VALUES (305,'EnService','Occupe',003,305);
+INSERT INTO Bornette VALUES (306,'EnService','Occupe',003,306);
+INSERT INTO Bornette VALUES (307,'EnService','Occupe',003,307);
+INSERT INTO Bornette VALUES (308,'HorsService','Occupe',003,308);
+INSERT INTO Bornette VALUES (309,'EnService','Occupe',003,309);
 
 --Insertion dans la table ClientAbonne ------------------------------------------
 INSERT INTO ClientAbonne VALUES(021,'Bourgeois','Jules','08-FEB-1991','H','15 rue Saint Bruno 38000','12345764231897','4DRG45',12,'05-FEB-2018','05-FEB-2019');
@@ -112,22 +117,27 @@ INSERT INTO ClientNonAbonne VALUES(032,'79458213654987');
 INSERT INTO ClientNonAbonne VALUES(079,'10054786231487');
 
 --Insertion dans la table Location abonne---------------------------------------
-INSERT INTO LocationAbonne values (021,200,'12-JAN-2019','13-JAN-2019',2,002,002);
-INSERT INTO LocationAbonne values (032,300,'12-JAN-2019','13-JAN-2019',1,003,003);
-INSERT INTO LocationAbonne values (955,100,'13-JAN-2019','14-JAN-2019',3,001,001);
-INSERT INTO LocationAbonne values (346,106,'13-JAN-2019','14-JAN-2019',2,001,001);
-INSERT INTO LocationAbonne values (043,206,'14-JAN-2019','15-JAN-2019',2,002,002);
+INSERT INTO LocationAbonne values (021,200,TO_DATE('12-JAN-2019 08:12:10','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 09:30:00','dd-MM-yyyy hh24:mi:ss'),2,002,002);
+INSERT INTO LocationAbonne values (032,300,TO_DATE('12-JAN-2019 08:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 09:00:00','dd-MM-yyyy hh24:mi:ss'),1,003,003);
+INSERT INTO LocationAbonne values (955,100,TO_DATE('13-JAN-2019 09:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 10:30:00','dd-MM-yyyy hh24:mi:ss'),3,001,001);
+INSERT INTO LocationAbonne values (346,106,TO_DATE('13-JAN-2019 10:30:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 11:30:00','dd-MM-yyyy hh24:mi:ss'),2,001,001);
+INSERT INTO LocationAbonne values (043,206,TO_DATE('14-JAN-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('15-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),2,002,002);
 
 --Insertion dans la table Location non abonne ---------------------------------------
-INSERT INTO LocationNonAbonne values (037,102,'12-JAN-2019','13-JAN-2019','',001,001,'4DRG45');
-INSERT INTO LocationNonAbonne values (065,103,'12-JAN-2019','13-JAN-2019','',001,001,'6DF5dF');
-INSERT INTO LocationNonAbonne values (078,203,'12-JAN-2019','13-JAN-2019','',002,002,'458ERom');
-INSERT INTO LocationNonAbonne values (069,209,'13-JAN-2019','14-JAN-2019','',002,002,'MP8d45');
-INSERT INTO LocationNonAbonne values (032,304,'13-JAN-2019','14-JAN-2019','',003,003,'MLe786');
-INSERT INTO LocationNonAbonne values (079,308,'14-JAN-2019','15-JAN-2019','',003,003,'DFx548');
+INSERT INTO LocationNonAbonne values (037,102,TO_DATE('12-JAN-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 17:00:00','dd-MM-yyyy hh24:mi:ss'),0,001,001,'4DRG45');
+INSERT INTO LocationNonAbonne values (065,103,TO_DATE('12-JAN-2019 15:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'),0,001,001,'6DF5dF');
+INSERT INTO LocationNonAbonne values (078,203,TO_DATE('12-JAN-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 15:00:00','dd-MM-yyyy hh24:mi:ss'),0,002,002,'458ERom');
+INSERT INTO LocationNonAbonne values (069,209,TO_DATE('13-JAN-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'),0,002,002,'MP8d45');
+INSERT INTO LocationNonAbonne values (032,304,TO_DATE('13-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'),0,003,003,'MLe786');
+INSERT INTO LocationNonAbonne values (079,308,TO_DATE('14-JAN-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('15-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),0,003,003,'DFx548');
 
 --Insertion dans la table Reservation-----------------------------------------
-INSERT INTO Reservation(021,103,'03-FEB-2019','03-FEB-2019')
+INSERT INTO Reservation values(001,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
+INSERT INTO Reservation values(002,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
+INSERT INTO Reservation values(003,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
+INSERT INTO Reservation values(004,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
+INSERT INTO Reservation values(005,021,001,TO_DATE('03-FEB-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'));
+INSERT INTO Reservation values(006,955,002,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'));
 
 
 
