@@ -1,6 +1,7 @@
 
 import Enum.Sexe;
 import Tables.ClientAbonne;
+import Tables.Station;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -18,21 +19,20 @@ import java.util.Scanner;
 
 public class MenuChoix {
 
+    Scanner in = new Scanner(System.in);
+
     public MenuChoix() {
     }
 
     public void menu(Connection conn) throws SQLException {
-        Scanner in = new Scanner(System.in);
 
-        // print menu
-        System.out.println("1. Client Abonne ~~~~~~ 2.Client Non Abonne~~~~~~~ 3.S'abonne ~~~~~ 4. Quit" );
-       // handle user commands
         boolean quit = false;
+        boolean Déconnexion = false;
 
         int menuItem;
 
         do {
-
+           System.out.println("1. Client Abonne ~~~~~~ 2.Client Non Abonne~~~~~~~ 3.S'abonne ~~~~~ 4. Quit");
             System.out.print("Choose menu item: ");
 
             menuItem = in.nextInt();
@@ -47,11 +47,40 @@ public class MenuChoix {
                     String nomid = in.next();
                     System.out.println("Entrez votre codeSecret");
                     String CodeSecret = in.next();
-                    int id_client = c_abonne.loginClient(conn, nomid, CodeSecret);
-                    if (id_client == -1) {System.out.println(" client non identifie ");break;}
-                    else {System.out.println("client identifie avec l id "+id_client);
-                    traitement_client_abonne(conn);
-                    
+                    int idClientLogin = c_abonne.loginClient(conn, nomid, CodeSecret);
+                    if (idClientLogin == -1) {
+                        System.out.println("~~~~~~~~~~~~~~ client non identifie~~~~~~~~~~~~~ ");
+                        break;
+                    } else {
+                        System.out.println("~~~~~~~~ client identifie avec l id~~~~~~~~~~~~ " + idClientLogin);
+
+                        do {
+                            System.out.println("Entrez votre choix !");
+                            System.out.println("1.Louer  ~~~~  2.Rendre ~~~~~ 3. Réserver ~~~~~ 4.Déconnexion");
+                            int Choix = in.nextInt();
+                            switch (Choix) {
+                                case 1:
+                                    System.out.println("Louer");
+                                    Station st = new Station();
+                                    st.getStationListe(conn);
+                                    break;
+                                case 2:
+                                    System.out.println(" Rendre");
+                                    break;
+                                case 3:
+                                    System.out.println("Réserver");
+                                    break;
+                                case 4:
+                                    System.out.println("Déconnexion");
+                                    Déconnexion = true;
+                                    quit =true;
+                                    break;
+                                default:
+
+                                    System.out.println("Choix invalid .");
+                            }
+                        } while (!Déconnexion);
+
                     }
 
                     break;
@@ -72,14 +101,14 @@ public class MenuChoix {
                     String prenom = in.next();
                     System.out.println("Entrez votre dateDeNaissance! yyyy-MM-dd");
                     String dateDeNaissance = in.next();
-                    //System.out.println("Entrez votre sexe");
-                    //String sexeIN = in.nextLine();
-                    //Sexe sexe = (sexeIN='H')? sexe.H:Sexe.F;
+                    System.out.println("Entrez votre sexe :H/F");
+                    char sexeIN = in.next().charAt(0);
+                    Sexe s=(sexeIN=='H')? Sexe.H:Sexe.F;
                     System.out.println("Entrez votre adresse");
                     String adresse = in.next();
                     System.out.println("Entrez votre NumCB");
                     String NumCB = in.next();
-                    ClientAbonne c = new ClientAbonne(nom, prenom, dateDeNaissance, Sexe.H, adresse, NumCB);
+                    ClientAbonne c = new ClientAbonne(nom, prenom, dateDeNaissance, s, adresse, NumCB);
                     c.Ajout_Client_Abonne(conn, c);
                     break;
                 case 4:
@@ -90,21 +119,13 @@ public class MenuChoix {
 
                 default:
 
-                    System.out.println("Invalid choice.");
+                    System.out.println("Choix invalid .");
 
             }
 
         } while (!quit);
 
         System.out.println("Bye-bye!");
-}
+    }
 
-   
-
-        public void traitement_client_abonne(Connection conn) {
-            
-            
-        }
-    
-
-}
+ }

@@ -75,6 +75,7 @@ public class ClientAbonne {
         }
         rs.close();
         st.close();
+        conn.commit();
 
     }
 
