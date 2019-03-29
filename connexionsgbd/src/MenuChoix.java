@@ -1,10 +1,10 @@
 
 import Enum.Sexe;
 import Tables.ClientAbonne;
-import Tables.Station;
+import Tables.LocationAbonne;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Scanner;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,7 +32,7 @@ public class MenuChoix {
         int menuItem;
 
         do {
-           System.out.println("1. Client Abonne ~~~~~~ 2.Client Non Abonne~~~~~~~ 3.S'abonne ~~~~~ 4. Quit");
+           System.out.println("1.Client Abonne~~~~ 2.Client Non Abonne~~~~ 3.S'abonne~~~ 4.Superviseur~~~ 5.Quit");
             System.out.print("Choose menu item: ");
 
             menuItem = in.nextInt();
@@ -43,26 +43,26 @@ public class MenuChoix {
 
                     System.out.println("Choix 1~~~~~|~~~~~~ identification ");
                     ClientAbonne c_abonne = new ClientAbonne();
-                    System.out.println("Entrez votre nom");
-                    String nomid = in.next();
-                    System.out.println("Entrez votre codeSecret");
+                    System.out.print("Entrez votre nom: ");
+                    String NomId = in.next();
+                    System.out.print("Entrez votre codeSecret: ");
                     String CodeSecret = in.next();
-                    int idClientLogin = c_abonne.loginClient(conn, nomid, CodeSecret);
+                    int idClientLogin = c_abonne.loginClient(conn, NomId, CodeSecret);
                     if (idClientLogin == -1) {
                         System.out.println("~~~~~~~~~~~~~~ client non identifie~~~~~~~~~~~~~ ");
                         break;
                     } else {
-                        System.out.println("~~~~~~~~ client identifie avec l id~~~~~~~~~~~~ " + idClientLogin);
+                        System.out.println("~~~~~~~~ client identifie avec ID~~~~~~~~~~~~ " + idClientLogin);
 
                         do {
                             System.out.println("Entrez votre choix !");
-                            System.out.println("1.Louer  ~~~~  2.Rendre ~~~~~ 3. Réserver ~~~~~ 4.Déconnexion");
+                            System.out.println("1.Louer~~~~ 2.Rendre~~~ 3.Réserver~~~ 4.Alerter ~~~ 5.Déconnexion");
                             int Choix = in.nextInt();
                             switch (Choix) {
                                 case 1:
                                     System.out.println("Louer");
-                                    Station st = new Station();
-                                    st.getStationListe(conn);
+                                    LocationAbonne.AjoutLocationAbonne(conn,idClientLogin);
+                                    
                                     break;
                                 case 2:
                                     System.out.println(" Rendre");
@@ -70,7 +70,10 @@ public class MenuChoix {
                                 case 3:
                                     System.out.println("Réserver");
                                     break;
-                                case 4:
+                                 case 4:
+                                    System.out.println("Alerter");
+                                    break;   
+                                case 5:
                                     System.out.println("Déconnexion");
                                     Déconnexion = true;
                                     quit =true;
@@ -112,6 +115,13 @@ public class MenuChoix {
                     c.Ajout_Client_Abonne(conn, c);
                     break;
                 case 4:
+
+                    System.out.println("Choix 4|Superviseur");
+
+                    // do something...
+                    break;    
+                    
+                case 5:
 
                     quit = true;
 
