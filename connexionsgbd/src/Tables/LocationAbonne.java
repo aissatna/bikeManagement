@@ -5,12 +5,16 @@
  */
 package Tables;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.sql.CallableStatement;
+
+import java.util.List;
 
 /**
  *
@@ -18,62 +22,67 @@ import java.util.Date;
  */
 public class LocationAbonne {
 
-    private int numClientAbonne;
-    private int numVelo;
-    private LocalDate DebutLocation;
-    private LocalDate FinLocation;
-    private int Duree;
-    private int StationDepart;
-    private int StationArrivee;
+    public static void AjoutLocationAbonne(Connection conn, int IdClient) throws SQLException {
+        int IDstation = Station.getIDStation(conn);
+        System.out.println("ID Station-->" + IDstation);
+        // get Le type de la Station 
+        String TypeStation = Station.getStationType(conn, IDstation);
+        System.out.println("Vous louez a une station de type: " + TypeStation);
+        // Liste Of modele velo disponible 
+        int IDModele = Modele.getModeleID(conn);
+        System.out.println("ID Modele-->" + IDModele);
+        // get Bornette &  velo disponible 
+        Statement stmt = conn.createStatement();
+        ResultSet rs4 = stmt.executeQuery("Select numBornette From Velo NATURAL JOIN Modele NATURAL JOIN Bornette where  EtatVelo = 'EnService' AND DisponibiliteVelo = 'Disponible' AND numModele= " + IDModele
+                + " AND etatBornette = 'EnService' AND disponibilite = 'Occupe'"
+                + " AND numStation= " + IDstation);;
 
-    public LocationAbonne() {
-    }
+        List<Integer> BornetteList = new ArrayList<Integer>();
+        int IDVelo = -1;
+        while (rs4.next()) {
+            BornetteList.add(rs4.getInt(1));
 
-    public void Ajout_Location_Abonne(Connection conn, int id_Client, int Id_velo, int id_StationDepart) throws SQLException {
-        this.numClientAbonne = id_Client;
-        this.numVelo = Id_velo; // Reste a verifier 
-        this.DebutLocation = LocalDate.now();
-        this.FinLocation = null;
-        this.Duree = 0;
-        this.StationDepart = id_StationDepart;
-        this.StationArrivee = -1;
-        Statement st = conn.createStatement();
-        int nb = st.executeUpdate("INSERT INTO LocationAbonne(numClientAbonne,numVelo,DebutLocation,FinLocation,Duree,StationDepart,StationArrivee)VALUES("
-                + this.numClientAbonne + "," + this.numVelo + ",TO_DATE('" + this.DebutLocation + "','yyyy-MM-dd')," + this.FinLocation + ","
-                + this.Duree + "," + this.StationDepart + "," + this.StationArrivee + ")");
-        if (nb > 0) {
-            System.out.println("Location enregistrée ....");
-
+        }
+        if (BornetteList.isEmpty()) {
+            System.out.println("Pas du velo disponible dans ce modele a cette station");
         } else {
-            System.out.println("Erreur dans l'insertion ??? ");
-        }
+            rs4 = stmt.executeQuery("Select numVelo from Bornette where numBornette = " + BornetteList.get(0));
+            while (rs4.next()) {
+                IDVelo = rs4.getInt(1);
+            }
 
+            CallableStatement cstmt = conn.prepareCall("{ call AjoutLocationAbonne(?,?,?,?,?,?,?) }");
+            CallableStatement cstmt1 = conn.prepareCall("{ call updateEtatVeloBornette(?,?,?,?) }");
+            cstmt.setInt(1, IdClient);
+            cstmt.setInt(2, IDVelo);
+            cstmt.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            cstmt.setNull(4, 0);
+            cstmt.setInt(5, 0);
+            cstmt.setInt(6, IDstation);
+            cstmt.setInt(7, -1);
+            // updateEtatVeloBornette
+            cstmt1.setInt(1, IDVelo);
+            cstmt1.setInt(2, BornetteList.get(0));
+            cstmt1.setString(3, "Louer");
+            cstmt1.setString(4, "Libre");
+
+            if (cstmt.executeUpdate() > 0 && cstmt1.executeUpdate() > 0) {
+
+                System.out.println("Location enregistrée .... avec MAJ ");
+                System.out.println("Recuperer Le velo Numero " + IDVelo + " sur la Bornette " + BornetteList.get(0));
+
+            } else {
+                System.out.println("Erreur dans l'insertion ??? ");
+            }
+
+            cstmt.close();
+            cstmt1.close();
+            
+        }
+        rs4.close();
+        // Close the result set, statement and theconnection 
+
+        stmt.close();
     }
 
-    public int get_NumClient_Abonne(Connection conn, String nom, String codeSecret) throws SQLException {
-        int numClientAbonne = -1;
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(" select numClientAbonne from clientabonne where nom = '" + nom + "' and codesecret = '" + codeSecret + "' ");
-        System.out.println("SELECT numClientAbonne FROM ClientAbonne WHERE nom ='" + nom + "'and codeSecret ='" + codeSecret + "'");
-        while (rs.next()) {
-            numClientAbonne = rs.getInt(1);
-        }
-        rs.close();
-        st.close();
-        return numClientAbonne;
-
-    }
-
-    public int get_NumStation(Connection conn, String adresseStation) throws SQLException {
-        int numStation = -1;
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT numStation FROM station WHERE adresse like '%" + adresseStation + "%'");
-        while (rs.next()) {
-            numStation = rs.getInt(1);
-        }
-        rs.close();
-        st.close();
-        return numStation;
-
-    }
 }
