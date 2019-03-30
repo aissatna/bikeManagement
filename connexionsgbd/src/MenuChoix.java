@@ -63,12 +63,10 @@ public class MenuChoix {
                             switch (Choix) {
                                 case 1:
                                     System.out.println("Louer");
-<<<<<<< HEAD
+
                                     Location.AjoutLocationAbonne(conn,idClientLogin);
                                     
-=======
-                                    
->>>>>>> 528b47a61d9b46d3a066e6c43e116df4fe4a109f
+
                                     break;
                                 case 2:
                                     System.out.println(" Rendre");
@@ -97,20 +95,13 @@ public class MenuChoix {
 
                 case 2:
 
-                    System.out.println("Choix 2|Client Non Abonne");
-<<<<<<< HEAD
-                    Location.AjoutLocationNonAbonne(conn);
-                    
-                    break;
-=======
-
                     System.out.println("Entrez votre choix !");
                     System.out.println("1.Louer~~~~ 2.Rendre");
                     int Choix = in.nextInt();
                     switch (Choix) {
                         case 1:
                             System.out.println("Louer");
-                            LocationNonAbonne.AjoutLocationNonAbonne(conn);
+                            Location.AjoutLocationNonAbonne(conn);
                             break;
                         case 2:
                             System.out.println(" Rendre");
@@ -123,7 +114,7 @@ public class MenuChoix {
                             System.out.println("Choix invalid .");
                             break;
                     }
->>>>>>> 528b47a61d9b46d3a066e6c43e116df4fe4a109f
+
 
                 case 3:
 
