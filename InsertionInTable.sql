@@ -123,7 +123,6 @@ INSERT INTO LocationAbonne values (955,100,TO_DATE('13-JAN-2019 09:00:00','dd-MM
 INSERT INTO LocationAbonne values (346,106,TO_DATE('13-JAN-2019 10:30:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 11:30:00','dd-MM-yyyy hh24:mi:ss'),2,001,001);
 INSERT INTO LocationAbonne values (043,206,TO_DATE('14-JAN-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('15-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),2,002,002);
 
---------------Insertion dans la table Location non abonne ---------------------------------------
 INSERT INTO LocationNonAbonne values (037,102,TO_DATE('12-JAN-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 17:00:00','dd-MM-yyyy hh24:mi:ss'),0,001,001,'4DRG45');
 INSERT INTO LocationNonAbonne values (065,103,TO_DATE('12-JAN-2019 15:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'),0,001,001,'6DF5dF');
 INSERT INTO LocationNonAbonne values (078,203,TO_DATE('12-JAN-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 15:00:00','dd-MM-yyyy hh24:mi:ss'),0,002,002,'458ERom');
@@ -131,7 +130,6 @@ INSERT INTO LocationNonAbonne values (069,209,TO_DATE('13-JAN-2019 13:00:00','dd
 INSERT INTO LocationNonAbonne values (032,304,TO_DATE('13-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'),0,003,003,'MLe786');
 INSERT INTO LocationNonAbonne values (079,308,TO_DATE('14-JAN-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('15-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),0,003,003,'DFx548');
 
--------------------------Insertion dans la table Reservation-----------------------------------------
 INSERT INTO Reservation values(001,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
 INSERT INTO Reservation values(002,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
 INSERT INTO Reservation values(003,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
