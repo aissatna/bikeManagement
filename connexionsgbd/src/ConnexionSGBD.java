@@ -36,7 +36,12 @@ class Connexionsgbd {
             RequetesBd.getClient(conn);
             MenuChoix mn = new MenuChoix();
             mn.menu(conn);
-
+            
+            RenduVeloV2 r = new RenduVeloV2();
+            
+            
+            
+            
 // Print information about connection warnings
             SQLWarningsExceptions.printWarnings(conn);
             conn.close();

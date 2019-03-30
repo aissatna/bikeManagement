@@ -5,6 +5,8 @@ import Tables.LocationAbonne;
 import Tables.LocationNonAbonne;
 import java.sql.Connection;
 import java.sql.SQLException;
+import Tables.RenduVeloV2;
+import java.sql.Connection;
 
 
 /*
@@ -33,7 +35,7 @@ public class MenuChoix {
         int menuItem;
 
         do {
-           System.out.println("1.Client Abonne~~~~ 2.Client Non Abonne~~~~ 3.S'abonne~~~ 4.Superviseur~~~ 5.Quit");
+            System.out.println("1.Client Abonne~~~~ 2.Client Non Abonne~~~~ 3.S'abonne~~~ 4.Superviseur~~~ 5.Quit");
             System.out.print("Choose menu item: ");
 
             menuItem = in.nextInt();
@@ -41,8 +43,8 @@ public class MenuChoix {
             switch (menuItem) {
 
                 case 1:
-
-                    System.out.println("Choix 1~~~~~|~~~~~~ identification ");
+                    System.out.println("Choix 1|Client Non Abonne");
+                    System.out.println("~~~~~|identification|~~~~~~");
                     ClientAbonne c_abonne = new ClientAbonne();
                     System.out.print("Entrez votre nom: ");
                     String NomId = in.next();
@@ -62,22 +64,22 @@ public class MenuChoix {
                             switch (Choix) {
                                 case 1:
                                     System.out.println("Louer");
-                                    LocationAbonne.AjoutLocationAbonne(conn,idClientLogin);
-                                    
+                                    LocationAbonne.AjoutLocationAbonne(conn, idClientLogin);
                                     break;
                                 case 2:
                                     System.out.println(" Rendre");
+                                    RenduVeloV2.clientAbonne(conn, idClientLogin);
                                     break;
                                 case 3:
                                     System.out.println("Réserver");
                                     break;
-                                 case 4:
+                                case 4:
                                     System.out.println("Alerter");
-                                    break;   
+                                    break;
                                 case 5:
                                     System.out.println("Déconnexion");
                                     Déconnexion = true;
-                                    quit =true;
+                                    quit = true;
                                     break;
                                 default:
 
@@ -92,9 +94,26 @@ public class MenuChoix {
                 case 2:
 
                     System.out.println("Choix 2|Client Non Abonne");
-                    LocationNonAbonne.AjoutLocationNonAbonne(conn);
-                    
-                    break;
+
+                    System.out.println("Entrez votre choix !");
+                    System.out.println("1.Louer~~~~ 2.Rendre");
+                    int Choix = in.nextInt();
+                    switch (Choix) {
+                        case 1:
+                            System.out.println("Louer");
+                            LocationNonAbonne.AjoutLocationNonAbonne(conn);
+                            break;
+                        case 2:
+                            System.out.println(" Rendre");
+                            RenduVeloV2.clientNonAbonne(conn);
+                            break;
+                        case 3:
+                            System.out.println("Alerter");
+                            break;
+                        default:
+                            System.out.println("Choix invalid .");
+                            break;
+                    }
 
                 case 3:
 
@@ -107,7 +126,7 @@ public class MenuChoix {
                     String dateDeNaissance = in.next();
                     System.out.println("Entrez votre sexe :H/F");
                     char sexeIN = in.next().charAt(0);
-                    Sexe s=(sexeIN=='H')? Sexe.H:Sexe.F;
+                    Sexe s = (sexeIN == 'H') ? Sexe.H : Sexe.F;
                     System.out.println("Entrez votre adresse");
                     String adresse = in.next();
                     System.out.println("Entrez votre NumCB");
@@ -120,8 +139,8 @@ public class MenuChoix {
                     System.out.println("Choix 4|Superviseur");
 
                     // do something...
-                    break;    
-                    
+                    break;
+
                 case 5:
 
                     quit = true;
@@ -139,4 +158,4 @@ public class MenuChoix {
         System.out.println("Bye-bye!");
     }
 
- }
+}
