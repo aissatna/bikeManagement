@@ -1,8 +1,7 @@
 
 import Enum.Sexe;
 import Tables.ClientAbonne;
-import Tables.LocationAbonne;
-import Tables.LocationNonAbonne;
+import Tables.Location;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -62,7 +61,7 @@ public class MenuChoix {
                             switch (Choix) {
                                 case 1:
                                     System.out.println("Louer");
-                                    LocationAbonne.AjoutLocationAbonne(conn,idClientLogin);
+                                    Location.AjoutLocationAbonne(conn,idClientLogin);
                                     
                                     break;
                                 case 2:
@@ -92,7 +91,7 @@ public class MenuChoix {
                 case 2:
 
                     System.out.println("Choix 2|Client Non Abonne");
-                    LocationNonAbonne.AjoutLocationNonAbonne(conn);
+                    Location.AjoutLocationNonAbonne(conn);
                     
                     break;
 
@@ -125,6 +124,7 @@ public class MenuChoix {
                 case 5:
 
                     quit = true;
+                    
 
                     break;
 
