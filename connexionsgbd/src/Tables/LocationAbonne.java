@@ -52,7 +52,7 @@ public class LocationAbonne {
             }
 
             CallableStatement cstmt = conn.prepareCall("{ call AjoutLocationAbonne(?,?,?,?,?,?,?) }");
-            CallableStatement cstmt1 = conn.prepareCall("{ call updateEtatVeloBornette(?,?) }");
+            CallableStatement cstmt1 = conn.prepareCall("{ call updateEtatVeloBornette(?,?,?,?) }");
             cstmt.setInt(1, IdClient);
             cstmt.setInt(2, IDVelo);
             cstmt.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
@@ -63,6 +63,8 @@ public class LocationAbonne {
             // updateEtatVeloBornette
             cstmt1.setInt(1, IDVelo);
             cstmt1.setInt(2, BornetteList.get(0));
+            cstmt1.setString(3, "Louer");
+            cstmt1.setString(4, "Libre");
 
             if (cstmt.executeUpdate() > 0 && cstmt1.executeUpdate() > 0) {
 
@@ -75,8 +77,7 @@ public class LocationAbonne {
 
             cstmt.close();
             cstmt1.close();
-            //LocationAbonne lc = new LocationAbonne();
-            //lc.Ajout_Location_Abonne(conn, IdClient, IDVelo, IDstation);
+            
         }
         rs4.close();
         // Close the result set, statement and theconnection 

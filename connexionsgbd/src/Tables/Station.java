@@ -54,9 +54,11 @@ public class Station {
                 + "TO_DATE('" + dateStr + "','hh24:mi:ss') < HeureFin AND "
                 + "numStation = " + IDstation);
         while (rs2.next()) {
-            System.out.println("aaaa");
+           
             TypeStation = rs2.getString(1);
         }
+        rs2.close();
+        stmt.close();
         return TypeStation;
    }
 }

@@ -2,6 +2,7 @@
 import Enum.Sexe;
 import Tables.ClientAbonne;
 import Tables.LocationAbonne;
+import Tables.LocationNonAbonne;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -91,8 +92,8 @@ public class MenuChoix {
                 case 2:
 
                     System.out.println("Choix 2|Client Non Abonne");
-
-                    // do something...
+                    LocationNonAbonne.AjoutLocationNonAbonne(conn);
+                    
                     break;
 
                 case 3:

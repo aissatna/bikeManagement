@@ -31,6 +31,8 @@ public class Modele {
         while (!ModelelList.contains(IDModele)) {
             IDModele = LectureClavier.lireEntier("Donner un numéro dans la liste SVP : ");
         }
+        rs3.close();
+        stmt.close();
         return IDModele;
     }
     
