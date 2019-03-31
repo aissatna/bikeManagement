@@ -33,7 +33,7 @@ class Connexionsgbd {
             Connection conn = DriverManager.getConnection(dbUrl, username, password);
             System.out.println("Connecté");
             // get informations 
-            RequetesBd.getClient(conn);
+            //RequetesBd.getClient(conn);
             MenuChoix mn = new MenuChoix();
             mn.menu(conn);
             

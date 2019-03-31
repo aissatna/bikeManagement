@@ -116,27 +116,7 @@ INSERT INTO ClientNonAbonne VALUES(069,'25874136985641');
 INSERT INTO ClientNonAbonne VALUES(032,'79458213654987');
 INSERT INTO ClientNonAbonne VALUES(079,'10054786231487');
 
---Insertion dans la table Location abonne---------------------------------------
-INSERT INTO LocationAbonne values (021,200,TO_DATE('12-JAN-2019 08:12:10','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 09:30:00','dd-MM-yyyy hh24:mi:ss'),2,002,002);
-INSERT INTO LocationAbonne values (032,300,TO_DATE('12-JAN-2019 08:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 09:00:00','dd-MM-yyyy hh24:mi:ss'),1,003,003);
-INSERT INTO LocationAbonne values (955,100,TO_DATE('13-JAN-2019 09:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 10:30:00','dd-MM-yyyy hh24:mi:ss'),3,001,001);
-INSERT INTO LocationAbonne values (346,106,TO_DATE('13-JAN-2019 10:30:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 11:30:00','dd-MM-yyyy hh24:mi:ss'),2,001,001);
-INSERT INTO LocationAbonne values (043,206,TO_DATE('14-JAN-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('15-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),2,002,002);
-
-INSERT INTO LocationNonAbonne values (037,102,TO_DATE('12-JAN-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 17:00:00','dd-MM-yyyy hh24:mi:ss'),0,001,001,'4DRG45');
-INSERT INTO LocationNonAbonne values (065,103,TO_DATE('12-JAN-2019 15:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'),0,001,001,'6DF5dF');
-INSERT INTO LocationNonAbonne values (078,203,TO_DATE('12-JAN-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('13-JAN-2019 15:00:00','dd-MM-yyyy hh24:mi:ss'),0,002,002,'458ERom');
-INSERT INTO LocationNonAbonne values (069,209,TO_DATE('13-JAN-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'),0,002,002,'MP8d45');
-INSERT INTO LocationNonAbonne values (032,304,TO_DATE('13-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('14-JAN-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'),0,003,003,'MLe786');
-INSERT INTO LocationNonAbonne values (079,308,TO_DATE('14-JAN-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('15-JAN-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),0,003,003,'DFx548');
-
-INSERT INTO Reservation values(001,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
-INSERT INTO Reservation values(002,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
-INSERT INTO Reservation values(003,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
-INSERT INTO Reservation values(004,021,001,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 13:00:00','dd-MM-yyyy hh24:mi:ss'));
-INSERT INTO Reservation values(005,021,001,TO_DATE('03-FEB-2019 12:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 14:00:00','dd-MM-yyyy hh24:mi:ss'));
-INSERT INTO Reservation values(006,955,002,TO_DATE('03-FEB-2019 11:00:00','dd-MM-yyyy hh24:mi:ss'),TO_DATE('03-FEB-2019 16:00:00','dd-MM-yyyy hh24:mi:ss'));
 
 
-
+/INSERT INTO Reservation values(001,021,001,TO_TIMESTAMP('2019-03-15 11:00:00.00','yyyy-mm-dd hh24:mi:ss.ff'),TO_TIMESTAMP('2019-03-16 13:00:00.00','yyyy-mm-dd hh24:mi:ss.ff'))
 commit;

@@ -1,8 +1,12 @@
 package TestesMethodes;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /*
@@ -53,8 +57,12 @@ public class TesteDate {
             System.out.println("dif 2 -> " + d2.getTime() / 60000);
 
             System.out.println("traitement jours en heure: " + ((diff / (60000l)) * 60));
-            
-            
+             
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh24:mi:ss");
+
+        String formatDateTime = now.format(formatter);
+            System.out.println("ffsghg"+formatDateTime);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,30 +50,32 @@ public class Location {
             System.out.print("Entrez votre Numero CB:");
             String NumCB = LectureClavier.lireChaine();
             CallableStatement cstmt = conn.prepareCall("{?=call AjoutClientNonAbonne(?)}");
-
             cstmt.registerOutParameter(1, Types.INTEGER);
-            cstmt.setString(2, NumCB);
+            cstmt.setString(2,NumCB);
             cstmt.execute();
             // Get the new ID client back
             int IDclient = cstmt.getInt(1);
-            System.out.println("ID cleint Non abonnne --->" + IDclient);
+            System.out.println("ID client Non abonnne --->" + IDclient);
             String codeSecret = generatePassword();
             
-            CallableStatement cstmt1 = conn.prepareCall("{ call AjoutLocationNonAbonne(?,?,?,?,?,?,?,?) }");
-            CallableStatement cstmt2 = conn.prepareCall("{ call updateEtatVeloBornette(?,?,?,?) }");
+            CallableStatement cstmt1 = conn.prepareCall("{ call AjoutLocationNonAbonne(?,?,?,?,?,?,?,?,?) }");
+            CallableStatement cstmt2 = conn.prepareCall("{ call updateEtatVeloBornetteLocation(?,?,?,?,?) }");
             cstmt1.setInt(1, IDclient);
             cstmt1.setInt(2, IDVelo);
-            cstmt1.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            cstmt1.setTimestamp(3, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
             cstmt1.setNull(4, 0);
             cstmt1.setInt(5, 0);
             cstmt1.setInt(6, IDstation);
             cstmt1.setInt(7, -1);
             cstmt1.setString(8, codeSecret);
+            cstmt1.setString(9, "Facturee");
             // updateEtatVeloBornette
             cstmt2.setInt(1, IDVelo);
             cstmt2.setInt(2, BornetteList.get(0));
             cstmt2.setString(3, "Louer");
             cstmt2.setString(4, "Libre");
+            cstmt2.setInt(5, IDstation);
+            
 
             if (cstmt1.executeUpdate() > 0 && cstmt2.executeUpdate() > 0) {
 
@@ -120,23 +124,28 @@ public class Location {
                 IDVelo = rs4.getInt(1);
             }
         rs4.close();
-            CallableStatement cstmt = conn.prepareCall("{ call AjoutLocationAbonne(?,?,?,?,?,?,?) }");
-            CallableStatement cstmt1 = conn.prepareCall("{ call updateEtatVeloBornette(?,?,?,?) }");
+        
+        
+
+       
+            CallableStatement cstmt = conn.prepareCall("{ call AjoutLocationAbonne(?,?,?,?,?,?,?,?) }");
+            CallableStatement cstmt1 = conn.prepareCall("{ call updateEtatVeloBornetteLocation(?,?,?,?,?) }");
             cstmt.setInt(1, IdClient);
             cstmt.setInt(2, IDVelo);
-            cstmt.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            cstmt.setTimestamp(3, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
             cstmt.setNull(4, 0);
             cstmt.setInt(5, 0);
             cstmt.setInt(6, IDstation);
             cstmt.setInt(7, -1);
+            cstmt.setString(8, "Facturee");
             // updateEtatVeloBornette
             cstmt1.setInt(1, IDVelo);
             cstmt1.setInt(2, BornetteList.get(0));
             cstmt1.setString(3, "Louer");
             cstmt1.setString(4, "Libre");
+            cstmt1.setInt(5, IDstation);
 
             if (cstmt.executeUpdate() > 0 && cstmt1.executeUpdate() > 0) {
-
                 System.out.println("Location enregistrée .... avec MAJ ");
                 System.out.println("Recuperer Le velo Numero " + IDVelo + " sur la Bornette " + BornetteList.get(0));
 

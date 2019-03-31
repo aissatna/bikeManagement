@@ -20,11 +20,12 @@ public class RequetesBd {
         Statement stmt = conn.createStatement();
         // Execute the query
 
-        ResultSet rs = stmt.executeQuery("Select Nom,CodeSecret From ClientAbonne ");
+        ResultSet rs = stmt.executeQuery("Select NUMLOCATIONABONNE From LocationNonAbonne ");
 
         while (rs.next()) {
-            System.out.print("Nom --->: " + rs.getString(1) + " ");
-            System.out.println("CodeSecret ---> " + rs.getString(2) + " ");
+            System.out.println("gggg"+rs.getInt(1));
+          //  System.out.print("Nom --->: " + rs.getString(1) + " ");
+           // System.out.println("CodeSecret ---> " + rs.getString(2) + " ");
 
         }
 

@@ -80,38 +80,44 @@ NumCB VARCHAR(20),
 constraint numClientNonAbonne_pk primary key (numClientNonAbonne));
 
 create table LocationAbonne(
+numLocationAbonne INTEGER,
 numClientAbonne INTEGER,
 numVelo INTEGER ,
-DebutLocation date not null,
-FinLocation date ,
+DebutLocation TIMESTAMP not null,
+FinLocation TIMESTAMP ,
 Duree INTEGER default 0,
 StationDepart INTEGER,
 StationArrivee INTEGER,
-constraint LocationAbonne_pk primary key (numClientAbonne,numVelo),
+EtatFacture VARCHAR(20),
+constraint LocationAbonne_pk primary key (numLocationAbonne),
 constraint LocationAbonne_fk Foreign key (numClientAbonne) references ClientAbonne(numClientAbonne),
 constraint LocationAbonne_fk2 Foreign key (numVelo) references Velo(numVelo),
-constraint LocationAbonne_fk3 Foreign key (StationDepart) references Station(numStation));
+constraint LocationAbonne_fk3 Foreign key (StationDepart) references Station(numStation),
+constraint EtatFactureA_check check (EtatFacture in ('Facturee','NonFacturee')));
 
 create table LocationNonAbonne(
+numLocationNonAbonne INTEGER,
 numClientNonAbonne INTEGER,
 numVelo INTEGER,
-DebutLocation date not null,
-FinLocation date,
+DebutLocation TIMESTAMP not null,
+FinLocation TIMESTAMP,
 Duree INTEGER default 0,
 StationDepart INTEGER,
 StationArrivee INTEGER,
 CodeSecret VARCHAR(20) not null,
-constraint LocationNonAbonne_pk primary key(numClientNonAbonne,numVelo),
+EtatFacture VARCHAR(20),
+constraint LocationNonAbonne_pk primary key(numLocationNonAbonne),
 constraint LocationNonAbonne_fk Foreign key (numClientNonAbonne) references ClientNonAbonne(numClientNonAbonne),
 constraint LocationNonAbonne_fk2 Foreign key (numVelo) references Velo(numVelo),
-constraint LocationNonAbonne_fk3 Foreign key (StationDepart) references Station(numStation));
+constraint LocationNonAbonne_fk3 Foreign key (StationDepart) references Station(numStation),
+constraint EtatFactureNA_check check (EtatFacture in ('Facturee','NonFacturee')));
 
 create table Reservation(
 numReservation INTEGER,
 numClientAbonne INTEGER,
 numStation INTEGER,
-DebutReservation date not null ,
-FinReservation date not null,
+DebutReservation TIMESTAMP not null ,
+FinReservation TIMESTAMP not null,
 constraint Reservation_pk primary key (numReservation),
 constraint Reservation_fk Foreign key (numClientAbonne) references ClientAbonne(numClientAbonne),
 constraint Reservation_fk2 Foreign key (numStation) references Station(numStation));

@@ -90,4 +90,32 @@ public class ClientAbonne {
         st.close();
         return numClientAbonne;
     }
+   public int countReserveration(Connection conn) throws SQLException{
+        Statement stmt = conn.createStatement();        
+        int res = -1;
+        ResultSet rs = stmt.executeQuery("select max(numreservation) as max from reservation");    
+        
+        while(rs.next()) {           
+            res = Integer.parseInt(rs.getString("max"));
+        }
+        
+        res++;
+        return res;
+    }
+    
+    //INSERT INTO Reservation values(001,021,001,TO_TIMESTAMP('2019-03-15 11:00:00.00','yyyy-mm-dd hh24:mi:ss.ff'),TO_TIMESTAMP('2019-03-16 13:00:00.00','yyyy-mm-dd hh24:mi:ss.ff'));
+    
+    public int reserver(Connection conn,int numClient, int numStation, String dateDebut, String dateFin) throws SQLException{
+        //'2019-12-26 08:12:10.02','yyyy-mm-dd HH:MI:SS.FF'
+        Statement stmt = conn.createStatement();
+        int NumReservation = countReserveration(conn) ; 
+        //TO_TIMESTAMP
+        int res = stmt.executeUpdate("INSERT INTO Reservation" +
+                                         " VALUES ("+NumReservation+","+numClient+", "+numStation+","
+                                                + "TO_TIMESTAMP('"+dateDebut+"' , 'yyyy-mm-dd HH24:MI:SS.FF'), "
+                                                + "TO_TIMESTAMP('"+dateFin+"'   , 'yyyy-mm-dd HH24:MI:SS.FF'))");   
+        
+        
+        return res;
+    }
 }
